@@ -12,7 +12,7 @@ npm i
 
 Run the mock backend
 ```bash
-npx json-server ./src/data/db.json
+npx json-server ./data/db.json
 ```
 
 Run the app
