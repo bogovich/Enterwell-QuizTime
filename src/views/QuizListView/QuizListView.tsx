@@ -17,7 +17,7 @@ const QuizListView = observer(() => {
 
   const handleShow = (id: number) => (event: React.MouseEvent) => {
     event.stopPropagation();
-    navigate(`/display-quiz/${id}`);
+    navigate(`/show-quiz/${id}`);
   };
 
   const handleDelete = (id: number) => (event: React.MouseEvent) => {
