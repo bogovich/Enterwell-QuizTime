@@ -5,11 +5,11 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import PlayCircleFilledWhiteIcon from "@mui/icons-material/PlayCircleFilledWhite";
 import Stack from "@mui/material/Stack";
 import Tooltip from "@mui/material/Tooltip";
-import StyledTableCell from "../../../components/StyledTableCell/StyledTableCell";
-import { Quiz, QuizListActionProps } from "../../../types/quiz";
+import StyledTableCell from "../../../../components/StyledTableCell/StyledTableCell";
+import { IncomingQuiz, QuizListActionProps } from "../../../../types/quiz";
 
 type QuizListRowProps = {
-  row: Quiz;
+  row: IncomingQuiz;
 } & QuizListActionProps;
 
 const StyledTableRow = styled(TableRow)(({ theme }) => ({

@@ -5,12 +5,12 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import StyledTableCell from "../../../components/StyledTableCell/StyledTableCell";
-import QuizListRow from "../QuizListRow/QuizListRow";
+import QuizListRow from "./QuizListRow/QuizListRow";
 import { observer } from "mobx-react-lite";
-import { Quiz, QuizListActionProps } from "../../../types/quiz";
+import { IncomingQuiz, QuizListActionProps } from "../../../types/quiz";
 
 type QuizListTableProps = {
-  data: Quiz[];
+  data: IncomingQuiz[];
 } & QuizListActionProps;
 
 const QuizListTable = observer(
