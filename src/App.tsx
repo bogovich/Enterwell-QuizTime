@@ -1,5 +1,8 @@
 import NavBar from "./components/NavBar/NavBar";
-import QuizzesView from "./views/QuizzesView/QuizzesView";
+import QuizListView from "./views/QuizListView/QuizListView";
+import ShowQuizView from "./views/ShowQuizView/ShowQuizView";
+import AddQuizView from './views/AddQuizView/AddQuizView';
+import EditQuizView from "./views/EditQuizView/EditQuizView";
 import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
 import './styles/global.scss';
 
@@ -20,7 +23,23 @@ const router = createBrowserRouter([
     children: [
       {
         path: "/",
-        element: <QuizzesView />,
+        element: <QuizListView />,
+      },
+      {
+        path: "/show-quiz/:id",
+        element: <ShowQuizView />,
+      },
+      {
+        path: "/add-quiz",
+        element: <AddQuizView />,
+      },
+      {
+        path: "/edit-quiz/:id",
+        element: <EditQuizView />,
+      },
+      {
+        path: "*",
+        element: <h1>Not found</h1>,
       },
     ],
   },
