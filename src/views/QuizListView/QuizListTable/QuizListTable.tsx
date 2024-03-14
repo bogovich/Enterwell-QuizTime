@@ -25,15 +25,21 @@ const QuizListTable = observer(
             </TableRow>
           </TableHead>
           <TableBody>
-            {data.map((row) => (
-              <QuizListRow
-                key={row.id}
-                row={row}
-                handleEdit={handleEdit}
-                handleShow={handleShow}
-                handleDelete={handleDelete}
-              />
-            ))}
+            {data.length ? (
+              data.map((row) => (
+                <QuizListRow
+                  key={row.id}
+                  row={row}
+                  handleEdit={handleEdit}
+                  handleShow={handleShow}
+                  handleDelete={handleDelete}
+                />
+              ))
+            ) : (
+              <TableRow>
+                <StyledTableCell>There are no quizzes currently available.</StyledTableCell>
+              </TableRow>
+            )}
           </TableBody>
         </Table>
       </TableContainer>
