@@ -25,6 +25,7 @@ export interface IncomingQuiz {
 }
 
 export interface OutgoingQuiz {
+    id ?: number;
     name: string;
     questions: OutgoingQuestion[];
 }
@@ -33,3 +34,5 @@ export type QuizListActionProps = {
     handleShow: (id: number) => (event: React.MouseEvent) => void;
     handleDelete: (id: number) => (event: React.MouseEvent) => void;
 };
+
+export type QuizFormType = OutgoingQuiz | UpdateQuiz;
