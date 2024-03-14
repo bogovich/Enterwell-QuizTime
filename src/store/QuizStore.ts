@@ -28,6 +28,10 @@ class QuizStore {
     this.selectedQuiz = quiz;
   }
 
+  resetSelectedQuiz = () => {
+    this.selectedQuiz = null;
+  }
+  
   fetchQuizzes = async () => {
     const quizzes = await QuizService.fetchQuizzes();
     this.setQuizzes(quizzes);
