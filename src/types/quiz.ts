@@ -1,15 +1,33 @@
-export interface Question {
-    id: number;
+export interface BaseQuestion {
     question: string;
     answer: string;
 }
 
-export interface Quiz {
+export interface IncomingQuestion extends BaseQuestion {
     id: number;
-    name: string;
-    questions: Question[];
 }
 
+export interface OutgoingQuestion extends BaseQuestion {
+    id?: number;
+}
+
+export interface UpdateQuiz {
+    id: number;
+    name: string;
+    questions: OutgoingQuestion[];
+}
+
+
+export interface IncomingQuiz {
+    id: number;
+    name: string;
+    questions: IncomingQuestion[];
+}
+
+export interface OutgoingQuiz {
+    name: string;
+    questions: OutgoingQuestion[];
+}
 export type QuizListActionProps = {
     handleEdit: () => void;
     handleShow: (id: number) => (event: React.MouseEvent) => void;
