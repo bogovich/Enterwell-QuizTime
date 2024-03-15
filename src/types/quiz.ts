@@ -30,7 +30,7 @@ export interface OutgoingQuiz {
     questions: OutgoingQuestion[];
 }
 export type QuizListActionProps = {
-    handleEdit: () => void;
+    handleEdit: (id: number) => (event: React.MouseEvent) => void;
     handleShow: (id: number) => (event: React.MouseEvent) => void;
     handleDelete: (id: number) => (event: React.MouseEvent) => void;
 };

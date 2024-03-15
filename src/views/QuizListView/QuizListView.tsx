@@ -11,8 +11,9 @@ const QuizListView = observer(() => {
     QuizStore.fetchQuizzes();
   }, []);
 
-  const handleEdit = () => {
-    console.log("edit");
+  const handleEdit = (id: number) => (event: React.MouseEvent) => {
+    event.stopPropagation();
+    navigate(`/edit-quiz/${id}`);
   };
 
   const handleShow = (id: number) => (event: React.MouseEvent) => {

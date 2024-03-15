@@ -31,7 +31,7 @@ const QuizListRow = ({
   handleShow,
   handleDelete,
 }: QuizListRowProps) => (
-  <StyledTableRow key={row.id} onClick={handleEdit}>
+  <StyledTableRow key={row.id} onClick={handleEdit(row.id)}>
     <StyledTableCell component="th" scope="row">
       {row.name}
     </StyledTableCell>
