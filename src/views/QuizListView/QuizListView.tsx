@@ -1,35 +1,24 @@
 import { observer } from "mobx-react-lite";
-import QuizStore from "../../store/QuizStore";
-import { useEffect } from "react";
 import QuizListTable from "./QuizListTable/QuizListTable";
-import { useNavigate } from "react-router-dom";
+import {useQuizListActions} from "../../hooks/useQuizListActions"
+import {useFetchQuizzes} from "../../hooks/useFetchQuizzes";
 
 const QuizListView = observer(() => {
-  const navigate = useNavigate();
 
-  useEffect(() => {
-    QuizStore.fetchQuizzes();
-  }, []);
+  const { quizzes, error } = useFetchQuizzes();
 
-  const handleEdit = (id: number) => (event: React.MouseEvent) => {
-    event.stopPropagation();
-    navigate(`/edit-quiz/${id}`);
-  };
+  if (error) {
+    return <div>Error: {error.message}</div>;
+  }
 
-  const handleShow = (id: number) => (event: React.MouseEvent) => {
-    event.stopPropagation();
-    navigate(`/show-quiz/${id}`);
-  };
+  const { handleEdit, handleShow, handleDelete } = useQuizListActions();
 
-  const handleDelete = (id: number) => (event: React.MouseEvent) => {
-    event.stopPropagation();
-    QuizStore.deleteQuiz(id);
-  };
+
   return (
     <div className="container">
       <h1>Quizzes by Rejd</h1>
       <QuizListTable
-        data={QuizStore.quizzes}
+        data={quizzes}
         handleEdit={handleEdit}
         handleShow={handleShow}
         handleDelete={handleDelete}
