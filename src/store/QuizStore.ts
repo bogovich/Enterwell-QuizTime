@@ -33,8 +33,16 @@ class QuizStore {
   }
   
   fetchQuizzes = async () => {
-    const quizzes = await QuizService.fetchQuizzes();
-    this.setQuizzes(quizzes);
+    this.setLoading(true);
+    try {
+      const quizzes = await QuizService.fetchQuizzes();
+      this.setQuizzes(quizzes);
+    } catch (error) {
+      console.error(error);
+      throw error;
+    } finally {
+      this.setLoading(false);
+    }
   };
 
   fetchQuiz = async (id: number) => {
@@ -44,6 +52,7 @@ class QuizStore {
       this.selectQuiz(quiz);
     } catch (error) {
       console.error(error);
+      throw error;
     } finally {
       this.setLoading(false);
     }
@@ -65,8 +74,16 @@ class QuizStore {
   };
 
   fetchAllQuestions = async () => {
-    const questions = await QuizService.fetchAllQuestions();
-    this.setQuestions(questions);
+    this.setLoading(true);
+    try {
+      const questions = await QuizService.fetchAllQuestions();
+      this.setQuestions(questions);
+    } catch (error) {
+      console.error(error);
+      throw error;
+    } finally {
+      this.setLoading(false);
+    }
   }
 }
 
