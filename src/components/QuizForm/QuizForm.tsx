@@ -60,7 +60,7 @@ const QuizForm = observer(({ handleSubmit, initialQuiz }: QuizFormProps) => {
           handleRemoveQuestion={handleRemoveQuestion}
         />
       ))}
-      <button onClick={handleOpen}>Add Existing Question</button>
+      <button type="button" onClick={handleOpen}>Add Existing Question</button>
       <QuestionsModal open={open} handleClose={handleClose} handleAddChosenQuestions={handleAddExistingQuestions}/>
       <button type="submit">Submit</button>
     </form>
