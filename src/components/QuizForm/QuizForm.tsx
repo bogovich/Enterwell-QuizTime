@@ -4,6 +4,8 @@ import { useQuizForm } from "../../hooks/useQuizForm";
 import { QuizFormType } from '../../types/quiz';
 import QuestionsModal from './QuestionsModal/QuestionsModal';
 import { useState } from 'react';
+import TextField from '@mui/material/TextField';
+import styles from './QuizForm.module.scss';
 
 type QuizFormProps = {
   handleSubmit: (quiz: QuizFormType) => void;
@@ -40,17 +42,20 @@ const QuizForm = observer(({ handleSubmit, initialQuiz }: QuizFormProps) => {
   };
 
   return (
-    <form onSubmit={handleFormSubmit}>
+    <form className={styles.quizForm} onSubmit={handleFormSubmit}>
       <h2>Quiz name</h2>
-      <input
-        type="text"
-        name="name"
+      <TextField
+        id="quiz-name"
+        label="Quiz Name"
         value={quiz.name}
         onChange={handleQuizChange}
+        name="name"
         required
+        fullWidth
+        variant="standard"
       />
       <h2>Questions</h2>
-      <button onClick={handleAddQuestion}>Add New Question</button>
+      <button type="button" onClick={handleAddQuestion}>Add New Question</button>
       {quiz.questions.map((q, index) => (
         <QuizFormQuestion
           key={index}

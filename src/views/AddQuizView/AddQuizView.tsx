@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import QuizForm from "../../components/QuizForm/QuizForm";
 import { OutgoingQuiz } from "../../types/quiz";
 import QuizStore from "../../store/QuizStore";
+import styles from "./AddQuizView.module.scss";
 
 const AddQuizView = () => {
 
@@ -19,7 +20,7 @@ const AddQuizView = () => {
     };
 
     return (
-        <div>
+        <div className={styles.container}>
             <h1>Add new quiz</h1>
         <QuizForm handleSubmit={handleAddQuiz} initialQuiz={initialQuiz}/>
         </div>

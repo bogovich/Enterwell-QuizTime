@@ -1,4 +1,6 @@
 import {observer} from 'mobx-react-lite';
+import styles from './QuizFormQuestion.module.scss';
+import TextField from '@mui/material/TextField';
 
 interface QuizQuestionProps {
   question: { question: string; answer: string };
@@ -17,23 +19,29 @@ const QuizFormQuestion = observer(({
   handleRemoveQuestion,
 }: QuizQuestionProps) => {
   return (
-    <div key={index}>
+    <div key={index} className={styles.formField}>
       <h3>Question {index + 1}</h3>
-      <input
-        type="text"
-        name="question"
-        value={question.question}
-        onChange={(e) => handleUpdateQuestion(e, index)}
-        required
-      />
+      <TextField
+          id="outlined-multiline-flexible"
+          label="Question"
+          multiline
+          name="question"
+          value={question.question}
+          fullWidth
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) => handleUpdateQuestion(e, index)}
+          required
+        />
       <h4>Answer</h4>
-      <input
-        type="text"
-        name="answer"
-        value={question.answer}
-        onChange={(e) => handleUpdateQuestion(e, index)}
-        required
-      />
+      <TextField
+          id="outlined-multiline-flexible"
+          label="Answer"
+          multiline
+          name="answer"
+          value={question.answer}
+          fullWidth
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) => handleUpdateQuestion(e, index)}
+          required
+        />
       <button type="button" onClick={() => handleRemoveQuestion(index)}>Remove</button>
     </div>
   );
