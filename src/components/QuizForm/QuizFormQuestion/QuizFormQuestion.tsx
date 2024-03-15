@@ -34,7 +34,7 @@ const QuizFormQuestion = observer(({
         onChange={(e) => handleUpdateQuestion(e, index)}
         required
       />
-      <button onClick={() => handleRemoveQuestion(index)}>Remove</button>
+      <button type="button" onClick={() => handleRemoveQuestion(index)}>Remove</button>
     </div>
   );
 });

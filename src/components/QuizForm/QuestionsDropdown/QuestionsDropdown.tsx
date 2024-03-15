@@ -1,7 +1,6 @@
 import FormControl from '@mui/material/FormControl';
 import Autocomplete from '@mui/material/Autocomplete';
 import TextField from '@mui/material/TextField';
-import Chip from '@mui/material/Chip';
 import { IncomingQuestion } from '../../../types/quiz';
 
 type QuestionDropdownProps = {
@@ -27,15 +26,8 @@ export default function QuestionsDropdown({questionList, questions, setQuestions
             setQuestions(newValue);
           }}
           renderInput={(params) => (
-            <TextField {...params} label="Name" />
+            <TextField {...params} label="Questions" />
           )}
-          renderTags={(value, getTagProps) =>
-            value.map((option, index) => (
-              <div key={option.id} style={{ maxHeight: '100px', overflow: 'auto' }}>
-                <Chip variant="outlined" label={option.question} {...getTagProps({ index })} />
-              </div>
-            ))
-          }
         />
       </FormControl>
     </div>
