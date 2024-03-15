@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { QuizFormType } from "../types/quiz";
+import { IncomingQuestion, QuizFormType } from "../types/quiz";
 
 export const useQuizForm = (initialQuiz: QuizFormType) => {
   const [quiz, setQuiz] = useState<QuizFormType>(
@@ -27,6 +27,13 @@ export const useQuizForm = (initialQuiz: QuizFormType) => {
     });
   };
 
+  const handleAddExistingQuestions = (questions: IncomingQuestion[]) => {
+    setQuiz({
+      ...quiz,
+      questions: [...quiz.questions, ...questions],
+    });
+  };
+
   const handleUpdateQuestion = (
     e: React.ChangeEvent<HTMLInputElement>,
     index: number
@@ -48,6 +55,7 @@ export const useQuizForm = (initialQuiz: QuizFormType) => {
     quiz,
     handleQuizChange,
     handleAddQuestion,
+    handleAddExistingQuestions,
     handleUpdateQuestion,
     handleRemoveQuestion,
   };
