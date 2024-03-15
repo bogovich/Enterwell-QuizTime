@@ -1,0 +1,29 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  width: 100%;
+  padding: 20px;
+
+  .quizSlide {
+    width: 100%;
+    height: 350px;
+    max-width: 600px;
+    margin-bottom: 20px;
+    position: relative;
+
+    .slideNum {
+        text-align: center;
+        
+    }
+  }
+
+  .controlQuiz {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 600px;
+  }
+}
