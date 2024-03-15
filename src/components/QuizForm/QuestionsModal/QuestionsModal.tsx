@@ -2,9 +2,9 @@ import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
 import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
-import QuizStore from '../../../store/QuizStore';
-import {useEffect, useState} from 'react';
+import {useState} from 'react';
 import QuestionsDropdown from '../QuestionsDropdown/QuestionsDropdown';
+import { useFetchQuestions } from '../../../hooks/useFetchQuestions';
 import { IncomingQuestion } from '../../../types/quiz';
 
 const style = {
@@ -27,11 +27,13 @@ const style = {
 
   export default function QuestionsModal({ open, handleClose, handleAddChosenQuestions } : QuestionsModalProps) {
 
-    useEffect(() => {
-        QuizStore.fetchAllQuestions();
-      }, []);
+    const {questionList, error} = useFetchQuestions();
 
-      const [questions, setQuestions] = useState<IncomingQuestion[]>([]);
+    const [questions, setQuestions] = useState<IncomingQuestion[]>([]);
+
+    if (error) {
+      return <div>Error: {error.message}</div>;
+    }
 
       const handleAddAndClose = () => {
         handleAddChosenQuestions(questions);
@@ -62,7 +64,7 @@ const style = {
             <CloseIcon />
           </IconButton>
                 <h2>Select from existing questions</h2>
-                <QuestionsDropdown questionList={QuizStore.questions} questions={questions} setQuestions={setQuestions}/>
+                <QuestionsDropdown questionList={questionList} questions={questions} setQuestions={setQuestions}/>
                 <button onClick={handleAddAndClose} aria-label='Add'>Add</button>
             </Box>
         </Modal>
