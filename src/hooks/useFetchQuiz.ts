@@ -7,5 +7,9 @@ export const useFetchQuiz = () => {
 
   useEffect(() => {
     QuizStore.fetchQuiz(Number(id));
+
+    return () => {
+      QuizStore.resetSelectedQuiz();
+    };
   }, [id]);
 };
