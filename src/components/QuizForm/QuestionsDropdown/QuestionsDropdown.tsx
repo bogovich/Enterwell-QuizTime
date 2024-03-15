@@ -31,7 +31,7 @@ export default function QuestionsDropdown({questionList, questions, setQuestions
           )}
           renderTags={(value, getTagProps) =>
             value.map((option, index) => (
-              <div style={{ maxHeight: '100px', overflow: 'auto' }}>
+              <div key={option.id} style={{ maxHeight: '100px', overflow: 'auto' }}>
                 <Chip variant="outlined" label={option.question} {...getTagProps({ index })} />
               </div>
             ))
