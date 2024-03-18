@@ -34,3 +34,18 @@
     margin-top: auto;
   }
 }
+
+@media (max-width: 450px) {
+  .questionAnswerPair {
+    padding: 0.5rem;
+
+    .question {
+      font-size: 1rem;
+    }
+
+    .answer {
+      font-size: 1.1rem;
+    }
+
+  }
+}

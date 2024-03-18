@@ -14,3 +14,10 @@
     margin-bottom: 1rem;
   }
 }
+
+@media (max-width: 450px) {
+  .quizForm {
+    box-shadow: none;
+    padding: 0;
+  }
+}
