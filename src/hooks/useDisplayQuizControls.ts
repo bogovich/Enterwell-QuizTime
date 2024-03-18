@@ -19,6 +19,10 @@ export const useDisplayQuizControls = () => {
         prevQuestion > 0 ? prevQuestion - 1 : prevQuestion
       );
     }, []);
+
+    const resetCurrentQuestion = useCallback(() => {
+      setCurrentQuestion(0);
+    }, []);
   
     useEffect(() => {
       const handleKeyDown = (event: KeyboardEvent) => {
@@ -41,6 +45,6 @@ export const useDisplayQuizControls = () => {
       };
     }, [handleNext, handlePrevious]);
 
-    return { currentQuestion, handleNext, handlePrevious };
+    return { currentQuestion, handleNext, handlePrevious, resetCurrentQuestion };
 
 };
