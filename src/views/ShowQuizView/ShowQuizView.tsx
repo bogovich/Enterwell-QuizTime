@@ -18,15 +18,14 @@ const ShowQuizView = observer(() => {
   const { selectedQuiz } = QuizStore;
   const { questions } = selectedQuiz;
   const questionsLength = questions.length;
-
   return (
     <div className={styles.container}>
       <h1>{selectedQuiz.name}</h1>
-      <h2 className={styles.slideNum}>
+      <h2 className={styles.slideNum} style={{ visibility: (currentQuestion + 1 > questionsLength) ? 'hidden' : 'visible' }}>
         Question number {currentQuestion + 1}.
       </h2>
       <div className={styles.quizSlide}>
-        {currentQuestion + 1 < questions.length ? (
+        {currentQuestion < questions.length ? (
           <QuestionAnswerPair
             question={questions[currentQuestion].question}
             answer={questions[currentQuestion].answer}

@@ -28,7 +28,7 @@ const QuizControls = ({
         Previous
       </Button>
     )}
-    {currentQuestion + 1 < questionsLength && (
+    {currentQuestion  < questionsLength && (
       <Button
         className={styles.nextBtn}
         variant="outlined"

@@ -8,7 +8,7 @@ export const useDisplayQuizControls = () => {
     const handleNext = useCallback(() => {
       setCurrentQuestion((prevQuestion) =>
         QuizStore.selectedQuiz &&
-        prevQuestion < QuizStore.selectedQuiz.questions.length - 1
+        prevQuestion <= QuizStore.selectedQuiz.questions.length - 1
           ? prevQuestion + 1
           : prevQuestion
       );
