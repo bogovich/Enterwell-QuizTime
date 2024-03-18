@@ -1,4 +1,5 @@
 import styles from "./QuestionAnswerPair.module.scss";
+import Button from "@mui/material/Button";
 import { useState } from "react";
 
 type QuestionAnswerPairProps = {
@@ -13,9 +14,14 @@ const QuestionAnswerPair = ({ question, answer }: QuestionAnswerPairProps) => {
     <div className={styles.questionAnswerPair}>
       <div className={styles.question}>{question}</div>
       {isAnswerVisible && <div className={styles.answer}>{answer}</div>}
-      <button className={styles.showBtn} onClick={() => setIsAnswerVisible(!isAnswerVisible)}>
+      <Button
+        variant="contained"
+        size="small"
+        className={styles.showBtn}
+        onClick={() => setIsAnswerVisible(!isAnswerVisible)}
+      >
         Show answer
-      </button>
+      </Button>
     </div>
   );
 };

@@ -1,0 +1,14 @@
+.quizControls {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 600px;
+
+    .prevBtn {
+      margin-right: auto;
+    }
+
+    .nextBtn {
+      margin-left: auto;
+    }
+  }
