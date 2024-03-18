@@ -2,6 +2,7 @@ import { observer } from "mobx-react-lite";
 import QuizListTable from "./QuizListTable/QuizListTable";
 import {useQuizListActions} from "../../hooks/useQuizListActions"
 import {useFetchQuizzes} from "../../hooks/useFetchQuizzes";
+import styles from "./QuizListView.module.scss";
 
 const QuizListView = observer(() => {
 
@@ -15,8 +16,8 @@ const QuizListView = observer(() => {
 
 
   return (
-    <div className="container">
-      <h1>Quizzes by Rejd</h1>
+    <div className={styles.container}>
+      <h1>QuizTime <span className="quiz-author">by Rejd</span></h1>
       <QuizListTable
         data={quizzes}
         handleEdit={handleEdit}

@@ -17,7 +17,7 @@ const QuizListTable = observer(
   ({ data, handleEdit, handleShow, handleDelete }: QuizListTableProps) => {
     return (
       <TableContainer component={Paper}>
-        <Table sx={{ minWidth: 700 }} aria-label="customized table">
+        <Table sx={{ minWidth: '100%' }} aria-label="customized table">
           <TableHead>
             <TableRow>
               <StyledTableCell>Name</StyledTableCell>
