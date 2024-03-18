@@ -51,7 +51,6 @@ const QuizFormQuestion = observer(({
             readOnly: question.id ? true : false,
           }}
         />
-      {/* <button type="button" onClick={() => handleRemoveQuestion(index)}>Remove</button> */}
       <Tooltip title="Remove" placement="top" arrow>
         <IconButton
           aria-label="remove question"

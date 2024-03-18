@@ -79,7 +79,11 @@ const QuizForm = observer(({ handleSubmit, initialQuiz }: QuizFormProps) => {
         handleClose={handleClose}
         handleAddChosenQuestions={handleAddExistingQuestions}
       />
-      {quiz.questions.length !== 0 && <button type="submit">Submit</button>}
+      {quiz.questions.length !== 0 && (
+        <Button variant="contained" type="submit">
+          Submit
+          </Button>
+          )}
     </form>
   );
 });
