@@ -1,11 +1,13 @@
 import { observer } from "mobx-react-lite";
 import QuizFormQuestion from "./QuizFormQuestion/QuizFormQuestion";
 import { useQuizForm } from "../../hooks/useQuizForm";
-import { QuizFormType } from '../../types/quiz';
-import QuestionsModal from './QuestionsModal/QuestionsModal';
-import { useState } from 'react';
-import TextField from '@mui/material/TextField';
-import styles from './QuizForm.module.scss';
+import { QuizFormType } from "../../types/quiz";
+import QuestionsModal from "./QuestionsModal/QuestionsModal";
+import { useState } from "react";
+import TextField from "@mui/material/TextField";
+import styles from "./QuizForm.module.scss";
+import Stack from "@mui/material/Stack";
+import Button from "@mui/material/Button";
 
 type QuizFormProps = {
   handleSubmit: (quiz: QuizFormType) => void;
@@ -25,7 +27,7 @@ const QuizForm = observer(({ handleSubmit, initialQuiz }: QuizFormProps) => {
   const handleFormSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     if (quiz.questions.length === 0) {
-      alert('Please add at least one question before submitting.');
+      alert("Please add at least one question before submitting.");
       return;
     }
     handleSubmit(quiz);
@@ -55,7 +57,14 @@ const QuizForm = observer(({ handleSubmit, initialQuiz }: QuizFormProps) => {
         variant="standard"
       />
       <h2>Questions</h2>
-      <button type="button" onClick={handleAddQuestion}>Add New Question</button>
+      <Stack spacing={2} className={styles.questionBtns} direction="row">
+        <Button variant="contained" size="small" onClick={handleAddQuestion}>
+          Add New Question
+        </Button>
+        <Button variant="outlined" size="small" onClick={handleOpen}>
+          Add Existing Question
+        </Button>
+      </Stack>
       {quiz.questions.map((q, index) => (
         <QuizFormQuestion
           key={index}
@@ -65,9 +74,12 @@ const QuizForm = observer(({ handleSubmit, initialQuiz }: QuizFormProps) => {
           handleRemoveQuestion={handleRemoveQuestion}
         />
       ))}
-      <button type="button" onClick={handleOpen}>Add Existing Question</button>
-      <QuestionsModal open={open} handleClose={handleClose} handleAddChosenQuestions={handleAddExistingQuestions}/>
-      <button type="submit">Submit</button>
+      <QuestionsModal
+        open={open}
+        handleClose={handleClose}
+        handleAddChosenQuestions={handleAddExistingQuestions}
+      />
+      {quiz.questions.length !== 0 && <button type="submit">Submit</button>}
     </form>
   );
 });

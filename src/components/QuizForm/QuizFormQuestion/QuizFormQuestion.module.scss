@@ -1,4 +1,28 @@
 .formField {
-  margin-bottom: 1rem;
+  margin-bottom: 1.5rem;
   width: 100%;
+  padding: 1.25rem 1rem;
+  // border: 1px solid 	#C1E1C1;
+  border-radius: 0.25rem;
+  position: relative;
+
+  .title {
+    font-size: 1.25rem;
+    margin-bottom: 1rem;
+  }
+
+  .removeButton {
+    position: absolute;
+    top: 0;
+    right: 0;
+    cursor: pointer;
+  }
+
+  &.existing {
+    box-shadow: rgba(3, 102, 214, 0.3) 0px 0px 0px 3px;
+  }
+
+  &.new {
+    box-shadow: rgba(3, 214, 38, 0.3) 0px 0px 0px 3px;
+  }
 }

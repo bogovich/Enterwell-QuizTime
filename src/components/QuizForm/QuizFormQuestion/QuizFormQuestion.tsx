@@ -1,9 +1,12 @@
 import {observer} from 'mobx-react-lite';
 import styles from './QuizFormQuestion.module.scss';
 import TextField from '@mui/material/TextField';
+import IconButton from '@mui/material/IconButton';
+import RemoveCircleOutlineIcon from '@mui/icons-material/RemoveCircleOutline';
+import Tooltip from "@mui/material/Tooltip";
 
 interface QuizQuestionProps {
-  question: { question: string; answer: string };
+  question: { id?: number, question: string; answer: string };
   index: number;
   handleUpdateQuestion: (
     e: React.ChangeEvent<HTMLInputElement>,
@@ -19,8 +22,8 @@ const QuizFormQuestion = observer(({
   handleRemoveQuestion,
 }: QuizQuestionProps) => {
   return (
-    <div key={index} className={styles.formField}>
-      <h3>Question {index + 1}</h3>
+    <div key={index} className={`${styles.formField} ${question.id ? styles.existing : styles.new}`}>
+      <h3 className={styles.title}>Question {index + 1}</h3>
       <TextField
           id="outlined-multiline-flexible"
           label="Question"
@@ -30,6 +33,9 @@ const QuizFormQuestion = observer(({
           fullWidth
           onChange={(e: React.ChangeEvent<HTMLInputElement>) => handleUpdateQuestion(e, index)}
           required
+          InputProps={{
+            readOnly: question.id ? true : false,
+          }}
         />
       <h4>Answer</h4>
       <TextField
@@ -41,8 +47,21 @@ const QuizFormQuestion = observer(({
           fullWidth
           onChange={(e: React.ChangeEvent<HTMLInputElement>) => handleUpdateQuestion(e, index)}
           required
+          InputProps={{
+            readOnly: question.id ? true : false,
+          }}
         />
-      <button type="button" onClick={() => handleRemoveQuestion(index)}>Remove</button>
+      {/* <button type="button" onClick={() => handleRemoveQuestion(index)}>Remove</button> */}
+      <Tooltip title="Remove" placement="top" arrow>
+        <IconButton
+          aria-label="remove question"
+          size="large"
+          className={styles.removeButton}
+          onClick={() => handleRemoveQuestion(index)}
+        >
+          <RemoveCircleOutlineIcon />
+        </IconButton>
+      </Tooltip>
     </div>
   );
 });
