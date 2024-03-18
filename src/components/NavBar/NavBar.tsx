@@ -20,11 +20,11 @@ const NavBar = () => {
             </Link>
           </li>
           <li>
-            <Link to="/">QuizTime <span className="quiz-author">by Rejd</span></Link>
+            <Link to="/" className={styles.quizNavbar}>QuizTime <span className="quiz-author">by Rejd</span></Link>
           </li>
         </ul>
         {!shouldHideButton && (
-          <Button variant="contained" onClick={handleAddQuiz}>
+          <Button variant="contained" size="medium" onClick={handleAddQuiz}>
             Add Quiz
           </Button>
         )}
