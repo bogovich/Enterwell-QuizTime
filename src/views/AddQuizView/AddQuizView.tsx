@@ -1,13 +1,12 @@
 import QuizForm from "../../components/QuizForm/QuizForm";
 import { OutgoingQuiz } from "../../types/quiz";
-import QuizStore from "../../store/QuizStore";
 import styles from "./AddQuizView.module.scss";
+import { useAddQuiz } from "../../hooks/useAddQuiz";
+
 
 const AddQuizView = () => {
 
-    const handleAddQuiz = (quiz: OutgoingQuiz) => {
-        QuizStore.addQuiz(quiz);
-    };
+    const { handleAddQuiz } = useAddQuiz();
 
     const initialQuiz: OutgoingQuiz = {
         name: "",

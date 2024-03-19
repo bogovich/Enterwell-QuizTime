@@ -1,10 +1,19 @@
 import { makeAutoObservable } from "mobx";
-import { IncomingQuiz, OutgoingQuiz, UpdateQuiz, IncomingQuestion } from "../types/quiz";
+import {
+  IncomingQuiz,
+  OutgoingQuiz,
+  UpdateQuiz,
+  IncomingQuestion,
+} from "../types/quiz";
 import QuizService from "../services/QuizService";
 
 class QuizStore {
   quizzes: IncomingQuiz[] = [];
-  selectedQuiz: IncomingQuiz | null = null;
+  selectedQuiz: IncomingQuiz = {
+    id: 0,
+    name: "",
+    questions: [],
+  };
   questions: IncomingQuestion[] = [];
   loading = false;
 
@@ -14,32 +23,25 @@ class QuizStore {
 
   setQuizzes = (quizzes: IncomingQuiz[]) => {
     this.quizzes = quizzes;
-  }
+  };
 
   setQuestions = (questions: IncomingQuestion[]) => {
     this.questions = questions;
-  }
+  };
 
   setLoading = (loading: boolean) => {
     this.loading = loading;
-  }
+  };
 
   selectQuiz = (quiz: IncomingQuiz) => {
     this.selectedQuiz = quiz;
-  }
+  };
 
-  resetSelectedQuiz = () => {
-    this.selectedQuiz = null;
-  }
-  
   fetchQuizzes = async () => {
     this.setLoading(true);
     try {
       const quizzes = await QuizService.fetchQuizzes();
       this.setQuizzes(quizzes);
-    } catch (error) {
-      console.error(error);
-      throw error;
     } finally {
       this.setLoading(false);
     }
@@ -50,27 +52,37 @@ class QuizStore {
     try {
       const quiz = await QuizService.fetchQuiz(id);
       this.selectQuiz(quiz);
-    } catch (error) {
-      console.error(error);
-      throw error;
     } finally {
       this.setLoading(false);
     }
   };
 
   addQuiz = async (quiz: OutgoingQuiz) => {
-    await QuizService.addQuiz(quiz);
-    this.fetchQuizzes();
+    this.setLoading(true);
+    try {
+      await QuizService.addQuiz(quiz);
+    } finally {
+      this.setLoading(false);
+    }
   };
 
   updateQuiz = async (quiz: UpdateQuiz) => {
-    await QuizService.updateQuiz(quiz);
-    this.fetchQuizzes();
+    this.setLoading(true);
+    try {
+      await QuizService.updateQuiz(quiz);
+    } finally {
+      this.setLoading(false);
+    }
   };
 
   deleteQuiz = async (id: number) => {
-    await QuizService.deleteQuiz(id);
-    this.fetchQuizzes();
+    this.setLoading(true);
+    try {
+      await QuizService.deleteQuiz(id);
+      this.fetchQuizzes();
+    } finally {
+      this.setLoading(false);
+    }
   };
 
   fetchAllQuestions = async () => {
@@ -78,13 +90,10 @@ class QuizStore {
     try {
       const questions = await QuizService.fetchAllQuestions();
       this.setQuestions(questions);
-    } catch (error) {
-      console.error(error);
-      throw error;
     } finally {
       this.setLoading(false);
     }
-  }
+  };
 }
 
 export default new QuizStore();

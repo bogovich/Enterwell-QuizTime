@@ -6,14 +6,9 @@ import styles from "./QuizListView.module.scss";
 
 const QuizListView = observer(() => {
 
-  const { quizzes, error } = useFetchQuizzes();
-
-  if (error) {
-    return <div>Error: {error.message}</div>;
-  }
+  const { quizzes } = useFetchQuizzes();
 
   const { handleEdit, handleShow, handleDelete } = useQuizListActions();
-
 
   return (
     <div className={styles.container}>
