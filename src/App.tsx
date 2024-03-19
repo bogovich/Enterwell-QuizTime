@@ -1,10 +1,11 @@
 import NavBar from "./components/NavBar/NavBar";
 import QuizListView from "./views/QuizListView/QuizListView";
 import ShowQuizView from "./views/ShowQuizView/ShowQuizView";
-import AddQuizView from './views/AddQuizView/AddQuizView';
+import AddQuizView from "./views/AddQuizView/AddQuizView";
 import EditQuizView from "./views/EditQuizView/EditQuizView";
+import { Toaster } from "react-hot-toast";
 import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
-import './styles/global.scss';
+import "./styles/global.scss";
 
 const HeaderLayout = () => (
   <>
@@ -48,6 +49,13 @@ const router = createBrowserRouter([
 function App() {
   return (
     <>
+      <Toaster
+        toastOptions={{
+          style: {
+            border: "1px solid #1876d2",
+          },
+        }}
+      />
       <RouterProvider router={router} />
     </>
   );
