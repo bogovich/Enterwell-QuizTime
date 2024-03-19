@@ -82,8 +82,8 @@ const QuizForm = observer(({ handleSubmit, initialQuiz }: QuizFormProps) => {
       {quiz.questions.length !== 0 && (
         <Button variant="contained" type="submit">
           Submit
-          </Button>
-          )}
+        </Button>
+      )}
     </form>
   );
 });
