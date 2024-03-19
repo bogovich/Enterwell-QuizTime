@@ -7,26 +7,8 @@ import { useState } from "react";
 import QuestionsDropdown from "../QuestionsDropdown/QuestionsDropdown";
 import { useFetchQuestions } from "../../../hooks/useFetchQuestions";
 import { IncomingQuestion } from "../../../types/quiz";
-
-const style = {
-  position: "absolute",
-  top: "30%",
-  left: "50%",
-  transform: "translate(-50%, -50%)",
-  width: 600,
-  bgcolor: "background.paper",
-  border: "2px solid #000",
-  boxShadow: 24,
-  p: 3,
-  borderRadius: 2,
-  textAlign: "center",
-  "& h2": {
-    marginBottom: 1,
-  },
-  "& p": {
-    marginBottom: 2,
-  },
-};
+import { useMediaQuery } from "@mui/material";
+import { useTheme } from "@mui/material/styles";
 
 type QuestionsModalProps = {
   open: boolean;
@@ -40,19 +22,41 @@ export default function QuestionsModal({
   handleAddChosenQuestions,
 }: QuestionsModalProps) {
   const { questionList, error } = useFetchQuestions();
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
+
+  const style = {
+    position: "absolute",
+    top: "30%",
+    left: "50%",
+    transform: "translate(-50%, -50%)",
+    width: isMobile ? "90%" : 600,
+    bgcolor: "background.paper",
+    border: "2px solid #000",
+    boxShadow: 24,
+    p: 3,
+    borderRadius: 2,
+    textAlign: "center",
+    "& h2": {
+      marginBottom: 1,
+    },
+    "& p": {
+      marginBottom: 2,
+    },
+  };
 
   const [chosenQuestions, setChosenQuestions] = useState<IncomingQuestion[]>(
     []
   );
 
-  if (error) {
-    return <div>Error: {error.message}</div>;
-  }
+  const resetAndClose = () => {
+    setChosenQuestions([]);
+    handleClose();
+  };
 
   const handleAddAndClose = () => {
     handleAddChosenQuestions(chosenQuestions);
-    setChosenQuestions([]);
-    handleClose();
+    resetAndClose();
   };
 
   return (
@@ -65,7 +69,7 @@ export default function QuestionsModal({
       <Box sx={style}>
         <IconButton
           aria-label="close"
-          onClick={handleClose}
+          onClick={resetAndClose}
           sx={{
             position: "absolute",
             right: 8,
@@ -75,16 +79,23 @@ export default function QuestionsModal({
         >
           <CloseIcon />
         </IconButton>
-        <h2>Select from existing questions</h2>
-        <p>
-          Search and add questions from the list below to your quiz. You can add
-          as many questions as you like.
-        </p>
-        <QuestionsDropdown
-          questionList={questionList}
-          questions={chosenQuestions}
-          setQuestions={setChosenQuestions}
-        />
+        {error ? (
+          <p>Error fetching questions! Please try again later.</p>
+        ) : (
+          <>
+            {" "}
+            <h2>Select from existing questions</h2>
+            <p>
+              Search and add questions from the list below to your quiz. You can
+              add as many questions as you like.
+            </p>
+            <QuestionsDropdown
+              questionList={questionList}
+              questions={chosenQuestions}
+              setQuestions={setChosenQuestions}
+            />
+          </>
+        )}
         <Button
           variant="contained"
           onClick={handleAddAndClose}
